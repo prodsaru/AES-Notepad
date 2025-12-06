@@ -7,7 +7,8 @@ from tkinter.filedialog import *
 class Notepad:
 
     __root = Tk()
-
+    keybook = Keybook()
+    encryption = ''
     # default window width and height
     __thisWidth = 300
     __thisHeight = 300
@@ -117,6 +118,8 @@ class Notepad:
     
         
     def __quitApplication(self):
+        with open(self.__file, 'w') as f:
+            f.write(encryption)
         self.__root.destroy()
         # exit()
 
@@ -142,17 +145,18 @@ class Notepad:
 
             file = open(self.__file,"r")
 
-            ed = encrypt_decrypt(file.read())
+            if self.__file not in keybook.read.dict:
+                encryption = encrypt_decrypt().en(file.read())
 
-            if file.readline() == "This is an encrypted file":
-            
-                decryption = ed.decrypt()
-
-                self.__thisTextArea.insert(1.0,decryption)
-
-                file.close()
             else:
-                self.__thisTextArea.insert(1.0,file.read())
+                encryption = file.read()
+                decryption = de(file.read(), self.__file)
+                with open(self.__file,'w') as f:
+                    f.write(decryption)
+          
+            self.__thisTextArea.insert(1.0,file.read())
+
+            file.close()
 
         
     def __newFile(self):
