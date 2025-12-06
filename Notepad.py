@@ -115,6 +115,9 @@ class Notepad:
         # Scrollbar will adjust automatically according to the content        
         self.__thisScrollBar.config(command=self.__thisTextArea.yview)     
         self.__thisTextArea.config(yscrollcommand=self.__thisScrollBar.set)
+
+        #password lol
+        self.__password = ""
     
         
     def __quitApplication(self):
@@ -131,6 +134,18 @@ class Notepad:
         self.__file = askopenfilename(defaultextension=".txt",
                                       filetypes=[("All Files","*.*"),
                                         ("Text Documents","*.txt")])
+
+        pInput= tkinter.simpledialog.askstring("Challenge Window", "Input Password:")
+        if pInput != self.__password:
+            tkinter.messagebox.showinfo(
+                "Password",
+                f"Access: Denied!"
+            )
+            return
+        else: tkinter.messagebox.showinfo(
+                "Password",
+                f"Access: Granted!"
+            )
 
         if self.__file == "":
             
