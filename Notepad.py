@@ -164,6 +164,12 @@ class Notepad:
         self.__file = None
         self.__thisTextArea.delete(1.0,END)
 
+        password = tkinter.simpledialog.askstring("Entry Window", "Enter Password:")
+        tkinter.messagebox.showinfo(
+            "Password",
+            f"Password: {password}" //asks for password
+        )
+
     def __saveFile(self):
 
         if self.__file == None:
